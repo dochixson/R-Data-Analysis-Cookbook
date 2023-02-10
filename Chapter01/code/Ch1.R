@@ -1,6 +1,10 @@
 # Code snippets for Chapter 1 of R Data analysis cookbook-2nd Edition
 # ===================================================================
 
+# Define path to data and set working directory
+path <- file.path("C:","Users","hixsone","Documents","GitHub","R-Data-Analysis-Cookbook","Chapter01","data", fsep="/")
+setwd(path)
+
 # Recipe: Acquire and prepare your ingredients -- Your Data
 
 auto <- read.csv("auto-mpg.csv", header=TRUE, sep = ",")
@@ -208,8 +212,9 @@ students
 students$Income.cat2 <- cut(students$Income,
                             breaks = 4, labels = c("Level1", "Level2",
                                                    "Level3","Level4"))
+students
 
-# Recipe: Creating dummies for catefgorical variables
+# Recipe: Creating dummies for categorical variables
 
 install.packages("dummies")
 library(dummies)
@@ -223,6 +228,11 @@ dummy(students$State, sep = ".")
 students.new1 <- dummy.data.frame(students,
                                   names = c("State","Gender") , sep = ".")
 
+# Alternative method with fastDummies
+
+install.packages("fastDummies")
+fastDummies::dummy_cols(students)
+students
 
 # Recipe: Handling missing data
 
@@ -250,9 +260,11 @@ library(Hmisc)
 #replace with mean
 housing.dat$ptratio <- impute(housing.dat$ptratio, mean)
 housing.dat$rad <- impute(housing.dat$rad, mean)
+# OR
 #replace with median
 housing.dat$ptratio <- impute(housing.dat$ptratio, median)
-housing.dat$rad <- impute(housing.dat$rad, median) 
+housing.dat$rad <- impute(housing.dat$rad, median)
+# OR
 #replace with mode/constant value
 housing.dat$ptratio <- impute(housing.dat$ptratio, 18)
 housing.dat$rad <- impute(housing.dat$rad, 6)
@@ -389,8 +401,8 @@ boxplot(ozoneData$pressure_height, main="Pressure Height with Outliers", boxwex=
 boxplot(capped_pressure_height, main="Pressure Height without Outliers", boxwex=0.1)
 
 #-- lof outlier detection
-install.packages("DMwR")
-library(DMwR)
-outlier.scores <- lofactor(ozoneData, k=3)
-outliers <- order(outlier.scores, decreasing=T)[1:3]
-print(outliers)
+# install.packages("DMwR")
+# library(DMwR)
+# outlier.scores <- lofactor(ozoneData, k=3)
+# outliers <- order(outlier.scores, decreasing=T)[1:3]
+# print(outliers)

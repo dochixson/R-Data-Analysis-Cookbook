@@ -1,4 +1,4 @@
-# Code snippets for Chapter 13 of R Data analysis cookbook-2nd Edition
+# Code snippets for Chapter 2 of R Data analysis cookbook-2nd Edition
 # ===================================================================
 
 
